@@ -2,56 +2,68 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-This repository provides a Claude Code plugin that bundles an Agent Skill for safely managing Git worktrees during development.
+A Claude Code plugin that bundles an Agent Skill for safely managing Git worktrees during development.
 
 ## Requirements
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) CLI
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) v1.0.33+
 - Git 2.5+ (worktree support)
 
-The Skill is model-invoked: it activates automatically when the conversation involves `git worktree`, parallel branch work, multiple working directories, or common worktree errors.
+## Installation
 
-## What the Skill covers
+### Option A: Interactive install
 
-- Adding worktrees for new or existing branches
-- Handling branch collisions ("already checked out")
-- Safe cleanup (remove, prune, lock/unlock) with a preference for non-destructive inspection first
+```text
+# 1. Start Claude Code
+claude
 
-## Install and test locally
+# 2. Add this repository as a marketplace
+/plugin marketplace add kndoshn/git-worktree-skill
 
-Clone this repository, then run:
-
-```bash
-claude --plugin-dir ./git-worktree-skill
+# 3. Install the plugin
+/plugin install git-worktree-skill@kndoshn-git-worktree-skill
 ```
 
-Restart Claude Code after changes so it reloads the plugin.
+### Option B: Repository configuration (for teams)
 
-## Install from GitHub
+Add to `.claude/settings.json`:
+
+```json
+{
+  "enabledPlugins": {
+    "git-worktree-skill@kndoshn-git-worktree-skill": true
+  },
+  "extraKnownMarketplaces": {
+    "kndoshn-git-worktree-skill": {
+      "source": "github",
+      "repo": "kndoshn/git-worktree-skill"
+    }
+  }
+}
+```
+
+Collaborators will be prompted to install the marketplace and enable the plugin.
+
+### Local development
 
 ```bash
 git clone https://github.com/kndoshn/git-worktree-skill
 claude --plugin-dir ./git-worktree-skill
 ```
 
-## How to use
+## What the Skill covers
 
-Ask Claude Code questions like:
+The Skill is model-invoked: it activates automatically when the conversation involves `git worktree`, parallel branch work, multiple working directories, or common worktree errors.
+
+- Adding worktrees for new or existing branches
+- Handling branch collisions ("already checked out")
+- Safe cleanup (remove, prune, lock/unlock) with a preference for non-destructive inspection first
+
+## Usage examples
 
 - "Create a worktree for a hotfix while keeping my current changes intact."
 - "This branch is already checked out in another worktree. What is the safest approach?"
 - "List my worktrees and propose a safe cleanup plan."
-
-## Sharing with others
-
-For community distribution, Claude Code recommends:
-1. Including a README with installation and usage instructions
-2. Using semantic versioning in `.claude-plugin/plugin.json`
-3. Distributing via a plugin marketplace
-
-## Plugin metadata
-
-Metadata lives in `.claude-plugin/plugin.json` and is used by Claude Code to discover the bundled Skill and version.
 
 ## Repository structure
 
@@ -62,6 +74,14 @@ git-worktree-skill/
 └── skills/
     └── managing-git-worktrees/
         └── SKILL.md
+```
+
+## Troubleshooting
+
+If `/plugin` is not recognized, ensure you have Claude Code v1.0.33 or later:
+
+```bash
+claude --version
 ```
 
 ## Contributing
