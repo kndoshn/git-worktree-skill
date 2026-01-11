@@ -1,0 +1,9 @@
+.DS_Store
+*.log
+*.swp
+*.swo
+*~
+.env
+.env.local
+.local/
+.claude/settings.local.json

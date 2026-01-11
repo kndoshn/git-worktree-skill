@@ -1,0 +1,28 @@
+{
+  "name": "git-worktree-skill",
+  "version": "0.1.0",
+  "description": "Agent Skill for safely managing Git worktrees in Claude Code.",
+  "author": {
+    "name": "kndoshn",
+    "url": "https://github.com/kndoshn"
+  },
+  "keywords": [
+    "claude-code",
+    "skill",
+    "git",
+    "worktree",
+    "parallel-development"
+  ],
+  "skills": [
+    "skills/managing-git-worktrees/SKILL.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kndoshn/git-worktree-skill.git"
+  },
+  "homepage": "https://github.com/kndoshn/git-worktree-skill#readme",
+  "bugs": {
+    "url": "https://github.com/kndoshn/git-worktree-skill/issues"
+  },
+  "license": "MIT"
+}
